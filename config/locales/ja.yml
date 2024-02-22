@@ -38,4 +38,4 @@ ja:
       destroy_confirm: 本当に削除してもよろしいですか？
   time:
     formats:
-      default: "%Y/%m/%d %H:%M:%S"
+      default: "%Y/%m/%d %H:%M"

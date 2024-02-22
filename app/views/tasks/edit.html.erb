@@ -1,5 +1,5 @@
 <h1>Edit Task Page</h1>
 
-<%= render  partial: 'form', locals: { button_class: 'update-task', task: @task } %>
+<%= render  partial: 'form', locals: { button_id: 'update-task', task: @task } %>
 
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Back', tasks_path, id: "back" %>

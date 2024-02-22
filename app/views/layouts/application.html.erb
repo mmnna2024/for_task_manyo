@@ -11,11 +11,11 @@
 
   <body>
     <ul>
-      <li id="tasks-index">
-      <%= link_to "Tasks index", tasks_path %>
+      <li>
+      <%= link_to "Tasks index", tasks_path, id: "tasks-index" %>
       </li>
-      <li id="new-task">
-      <%= link_to "New Task", new_task_path %>
+      <li>
+      <%= link_to "New Task", new_task_path, id: "new-task" %>
       </li>
     <%= yield %>
   </body>

@@ -27,5 +27,8 @@ module CdpWebManyoTask
         controller_specs: false,
         request_specs: false
     end
+
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
   end
 end

@@ -36,3 +36,6 @@ ja:
       new_task: タスクを登録する
     messages:
       destroy_confirm: 本当に削除してもよろしいですか？
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"

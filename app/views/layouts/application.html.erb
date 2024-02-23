@@ -12,10 +12,10 @@
   <body>
     <ul>
       <li>
-      <%= link_to "Tasks Index", tasks_path, id: "tasks-index" %>
+      <%= link_to t('helpers.links.tasks_index'), tasks_path, id: "tasks-index" %>
       </li>
       <li>
-      <%= link_to "New Task", new_task_path, id: "new-task" %>
+      <%= link_to t('helpers.links.new_task'), new_task_path, id: "new-task" %>
       </li>
     </ul>
     <%= yield %>

@@ -1,5 +1,5 @@
-<h1>New Task Page</h1>
+<h1><%= t('.title') %></h1>
 
 <%= render partial: 'form', locals: { button_id: 'create-task', task: @task } %>
 
-<%= link_to 'Back', tasks_path, id: "back" %>
+<%= link_to t('helpers.links.back'), tasks_path, id: "back" %>

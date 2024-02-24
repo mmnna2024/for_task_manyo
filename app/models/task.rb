@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  validates :title, :content, presence: true
+  validates :title, :content, :deadline_on, :priority, :status, presence: true
   enum priority: {
     低: 0,
     中: 1,

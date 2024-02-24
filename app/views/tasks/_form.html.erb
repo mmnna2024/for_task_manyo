@@ -11,27 +11,27 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title %><br>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :content %><br>
     <%= form.text_area :content %>
   </div>
 
   <div class="field">
-    <%= form.label :deadline_on %>
+    <%= form.label :deadline_on %><br>
     <%= form.date_field :deadline_on %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
+    <%= form.label :priority %><br>
     <%= form.select :priority, Task.priorities.keys, include_blank: true %>
   </div>
 
   <div class="field">
-    <%= form.label :status %>
+    <%= form.label :status %><br>
     <%= form.select :status, Task.statuses.keys, include_blank: true %>
   </div>
 

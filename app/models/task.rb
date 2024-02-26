@@ -10,4 +10,7 @@ class Task < ApplicationRecord
     着手中: 1,
     完了: 2,
   }
+
+  scope :title_search, ->(part) {where("title like ?", "%#{part}%")}
+  scope :status_search, ->(status) {where(status: status)}
 end

@@ -3,7 +3,15 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:sort_deadline_on] == 'true'
+      @tasks = Task.all.order(deadline_on: :asc)
+    elsif params[:sort_priority] == 'true'
+      @tasks = Task.all.order(priority: :desc)
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
+  
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -63,4 +71,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
     end
+
 end

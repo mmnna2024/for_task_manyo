@@ -28,6 +28,8 @@ class Task < ApplicationRecord
       Task.all.order(deadline_on: :asc)
     elsif params[:sort_priority] == 'true'
       Task.all.order(priority: :desc)
+    else
+      Task.all
     end
   end 
 

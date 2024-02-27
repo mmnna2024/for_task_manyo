@@ -3,14 +3,14 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    @tasks = Task.all
+
     if params[:search].present?
       @tasks = Task.seach_by_params(params)
     end
 
     if params[:sort_deadline_on].present? || params[:sort_priority].present?
       @tasks = Task.sort_by_columns(params)
-    else
-      @tasks = Task.all
     end
 
     @tasks = @tasks.sort_by_created_at.page(params[:page]).per(10)

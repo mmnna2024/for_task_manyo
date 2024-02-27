@@ -16,5 +16,20 @@
   <%= l @task.created_at %>
 </p>
 
+<p>
+  <strong><%= t('activerecord.attributes.task.deadline_on') %></strong>
+  <%= @task.deadline_on %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.task.priority') %></strong>
+  <%= @task.priority %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.task.status') %></strong>
+  <%= @task.status %>
+</p>
+
 <%= link_to t('helpers.links.edit'), edit_task_path(@task), id: "edit-task" %> |
 <%= link_to t('helpers.links.back'), tasks_path, id: "back" %>

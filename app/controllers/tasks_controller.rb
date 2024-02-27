@@ -3,25 +3,17 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    if params[:sort_deadline_on] == 'true'
-      @tasks = Task.all.order(deadline_on: :asc, created_at: :desc)
-    elsif params[:sort_priority] == 'true'
-      @tasks = Task.all.order(priority: :desc, created_at: :desc)
-    else
-      @tasks = Task.all.order(created_at: :desc)
-    end
-
     if params[:search].present?
-      if params[:search][:status].present? && params[:search][:title].present?#パラメータにタイトルとステータスの両方があった場合
-      @tasks = Task.title_search(params[:search][:title]).status_search(params[:search][:status])
-        elsif params[:search][:status].blank? && params[:search][:title].present?#パラメータにタイトルのみがあった場合
-        @tasks = Task.title_search(params[:search][:title])
-        elsif params[:search][:status].present? && params[:search][:title].blank?#パラメータにステータスのみがあった場合
-        @tasks = Task.status_search(params[:search][:status])
-      end
+      @tasks = Task.seach_by_params(params)
     end
 
-    @tasks = @tasks.page(params[:page]).per(10)
+    if params[:sort_deadline_on].present? || params[:sort_priority].present?
+      @tasks = Task.sort_by_columns(params)
+    else
+      @tasks = Task.all
+    end
+
+    @tasks = @tasks.sort_by_created_at.page(params[:page]).per(10)
   end
 
   # GET /tasks/1 or /tasks/1.json

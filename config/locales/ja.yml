@@ -19,6 +19,7 @@ ja:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
+      taken: はすでに使用されています
   tasks:
     index:
       title: タスク一覧ページ
@@ -41,6 +42,10 @@ ja:
       title: アカウント編集ページ
     show: 
       title: アカウント詳細ページ
+    create:
+      created: アカウントを登録しました
+    update:
+      updated: アカウントを更新しました
   helpers:
     links:
       show: 詳細

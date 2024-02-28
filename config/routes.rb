@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   resources :tasks do
     get '/search', to: 'tasks#index'
   end
-  resources :users, only: [:new, :create, :show, :edit, :destroy]
+  resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 end

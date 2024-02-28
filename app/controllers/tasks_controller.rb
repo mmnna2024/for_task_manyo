@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, :correct_user, only: %i[ show edit update destroy ]
+  skip_before_action :logout_required
 
   # GET /tasks or /tasks.json
   def index
@@ -32,12 +33,11 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
       if @task.save
-        redirect_to tasks_path , notice: t('.created')
-        #format.json { render :show, status: :created, location: @task }
+        redirect_to tasks_path, notice: t('.created')
       else
         render :new
-        #format.json { render json: @task.errors, status: :unprocessable_entity }
       end
   end
 
@@ -72,6 +72,13 @@ class TasksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    end
+
+    def correct_user
+      @task = current_user.tasks.find_by(id: params[:id])
+      unless @task
+        redirect_back(fallback_location: root_path)
+      end
     end
 
 end

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, :correct_user, only: %i[ show edit update destroy ]
-  skip_before_action :logout_required
+  #skip_before_action :logout_required
 
   # GET /tasks or /tasks.json
   def index
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = current_user.id
       if @task.save
-        redirect_to tasks_path, notice: t('.created')
+        redirect_to tasks_path, flash: { notice: t('.created') }
       else
         render :new
       end
@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: t('.updated') }
+        format.html { redirect_to @task, flash: { notice: t('.updated') } }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: t('.destroyed') }
+      format.html { redirect_to tasks_url, flash: { notice: t('.destroyed') } }
       format.json { head :no_content }
     end
   end
@@ -77,7 +77,7 @@ class TasksController < ApplicationController
     def correct_user
       @task = current_user.tasks.find_by(id: params[:id])
       unless @task
-        redirect_back(fallback_location: root_path)
+        redirect_to tasks_path, flash: { notice: "アクセス権限がありません" }
       end
     end
 

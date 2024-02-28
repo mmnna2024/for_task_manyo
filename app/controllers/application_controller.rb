@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   private
 
   def login_required
-    redirect_to new_session_path, flash: { login_alert: 'ログインしてください' } unless current_user
+    redirect_to new_session_path, flash: { notice: "ログインしてください" } unless current_user
   end
 
   def logout_required
-    redirect_to tasks_path, flash: { login_alert: 'ログアウトしてください' } if current_user
+    redirect_to tasks_path, flash: { notice: "ログアウトしてください" } if current_user
   end
 end

@@ -1,4 +1,4 @@
-<h1>アカウント編集ページ</h1>
+<h1><%= t('.title') %></h1>
 <% if @user.errors.any? %>
     <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
@@ -11,18 +11,30 @@
 <% end %>
 
 <%= form_with(model: @user, local: true) do |f| %>
-    <%= f.label :名前 %>
-    <%= f.text_field :name %>
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email %>
-    <%= f.label :パスワード %>
-    <%= f.password_field :password %>
-    <%= f.label :パスワード（確認） %>
-    <%= f.password_field :password_confirmation %>
     <div>
-    <%= f.submit "更新する" %>
-    </div>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+  </div>
+
+  <div>
+  <%= f.label :email %><br>
+  <%= f.email_field :email %>
+  </div>
+
+  <div>
+  <%= f.label :password %><br>
+  <%= f.password_field :password %>
+  </div>
+
+  <div>
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+  <%= f.submit "更新する", id: "update-user" %>
+  </div>
 <% end %>
-<div id = "back">
-<%= link_to t('common.back'), user_path %>
+<div>
+<%= link_to t('helpers.links.back'), user_path, id: "back"%>
 </div>

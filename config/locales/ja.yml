@@ -10,6 +10,11 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -29,6 +34,13 @@ ja:
       updated: タスクを更新しました
     destroy:
       destroyed: タスクを削除しました
+  users:
+    new: 
+      title: アカウント登録ページ
+    edit: 
+      title: アカウント編集ページ
+    show: 
+      title: アカウント詳細ページ
   helpers:
     links:
       show: 詳細

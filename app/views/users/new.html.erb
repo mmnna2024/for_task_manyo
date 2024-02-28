@@ -1,8 +1,7 @@
-<h1>アカウント登録ページ</h1>
+<h1><%= t('.title') %></h1>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
     <ul>
     <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -12,13 +11,27 @@
 <% end %>
 
 <%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :name %>
+  <div>
+  <%= f.label :name %><br>
   <%= f.text_field :name %>
-  <%= f.label :email %>
+  </div>
+
+  <div>
+  <%= f.label :email %><br>
   <%= f.email_field :email %>
-  <%= f.label :password %>
+  </div>
+
+  <div>
+  <%= f.label :password %><br>
   <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
+  </div>
+
+  <div>
+  <%= f.label :password_confirmation %><br>
   <%= f.password_field :password_confirmation %>
-  <%= f.submit "Create my account" %>
+  </div>
+
+  <div>
+  <%= f.submit "登録する", id: "create-user" %>
+  </div>
 <% end %>

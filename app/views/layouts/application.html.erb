@@ -10,14 +10,32 @@
   </head>
 
   <body>
-    <ul>
-      <li>
-      <%= link_to t('helpers.links.tasks_index'), tasks_path, id: "tasks-index" %>
-      </li>
-      <li>
-      <%= link_to t('helpers.links.new_task'), new_task_path, id: "new-task" %>
-      </li>
-    </ul>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    <% if logged_in? %>
+      <ul>
+        <li id="tasks-index">
+        <%= link_to t('helpers.links.tasks_index'), tasks_path %>
+        </li>
+        <li id="new-task">
+        <%= link_to t('helpers.links.new_task'), new_task_path %>
+        </li>
+        <li id="account-setting">
+        <%= link_to "アカウント設定", user_path(current_user.id) %>
+        </li>
+        <li id="sign-out">
+        <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+        </li>
+      <% else %>
+        <li id="sign-up">
+        <%= link_to "アカウント登録", new_user_path %>
+        </li>
+        <li id="sign-in">
+        <%= link_to "ログイン", new_session_path %>
+        </li>
+      </ul>
+    <% end %>
     <%= yield %>
   </body>
 </html>

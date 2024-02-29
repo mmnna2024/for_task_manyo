@@ -31,8 +31,8 @@
   <%= f.password_field :password_confirmation %>
   </div>
 
-  <div>
-  <%= f.label :admin %><br>
+  <div class= "check_admin">
+  <%= f.label :admin, "管理者権限" %><br>
   <%= f.check_box :admin, {}, "true", "false" %>
   </div>
 

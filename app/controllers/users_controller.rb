@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.tasks.destroy_all
     @user.destroy
-    redirect_to admin_users_path
+    redirect_to admin_users_path, flash: { notice: "ユーザを削除しました" }
   end
   
   private

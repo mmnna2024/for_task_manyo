@@ -15,7 +15,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
-        admin: 管理者権限
+        admin: 管理者
         task_amount: タスク数
   sessions:
     new:
@@ -26,6 +26,8 @@ ja:
     messages:
       blank: を入力してください
       taken: はすでに使用されています
+      admin_cannot_destroy: が0人になるため削除できません
+      admin_cannot_uncheck: が0人になるため権限を変更できません
   tasks:
     index:
       title: タスク一覧ページ
@@ -69,3 +71,8 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
+  views:
+    pagination:
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."

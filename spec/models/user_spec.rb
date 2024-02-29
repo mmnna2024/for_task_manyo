@@ -24,7 +24,7 @@ RSpec.describe 'ユーザモデル機能', type: :model do
       it 'バリデーションに失敗する' do
         user1.update(password: nil)
         expect(user1).to be_invalid
-        expect(user1.errors.full_messages).to eq ["パスワードは6文字以上で入力してください", "パスワードを入力してください"]
+        expect(user1.errors.full_messages).to eq ["パスワードを入力してください", "パスワードは6文字以上で入力してください"]
       end
     end
 

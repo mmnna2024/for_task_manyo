@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
-  skip_before_action :login_required, :logout_required
+  before_action :require_admin
+  skip_before_action :logout_required
+
 
   def index
     @users = User.all
@@ -12,7 +14,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, flash: { notice: t('.created') }
+      redirect_to admin_users_path, flash: { notice: "ユーザを登録しました" }
     else
       render :new
     end
@@ -30,7 +32,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-        redirect_to admin_users_path, flash: { notice: t('.updated') }
+        redirect_to admin_users_path, flash: { notice: "ユーザを更新しました" }
     else
         render :edit
     end
@@ -43,5 +45,9 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+  end
+
+  def require_admin
+    redirect_to tasks_path, flash: { notice: "管理者以外アクセスできません" } unless user_admin?
   end
 end

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, :correct_user, only: %i[ show edit update destroy ]
-  #skip_before_action :logout_required
+  skip_before_action :logout_required
 
   # GET /tasks or /tasks.json
   def index

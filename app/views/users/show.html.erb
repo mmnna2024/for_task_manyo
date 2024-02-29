@@ -5,6 +5,3 @@
 <span>
 <%= link_to t('helpers.links.edit'), edit_user_path,  id: "edit-user" %>
 </span>
-<span id = "destroy-user">
-<%= link_to t('helpers.links.destroy'), user_path(params[:id]), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" } %>
-</span>

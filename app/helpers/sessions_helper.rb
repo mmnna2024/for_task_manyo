@@ -8,6 +8,10 @@ module SessionsHelper
     current_user.present?
   end
 
+  def user_admin?
+    current_user.admin?
+  end
+
   def log_in(user)
     session[:user_id] = user.id
   end
@@ -16,11 +20,4 @@ module SessionsHelper
     user == current_user
   end
 
-  # def current_user.admin
-  #   @current_user ||= User.find_by(id: session[:user_id], admin: true) if session[:user_id]
-  # end
-
-  # def current_user.admin?(user)
-  #   user == current_user.admin
-  # end
 end

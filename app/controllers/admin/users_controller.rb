@@ -1,5 +1,4 @@
 class Admin::UsersController < ApplicationController
-  #before_action :admin_user
   skip_before_action :login_required, :logout_required
 
   def index
@@ -21,6 +20,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks
   end
 
   def edit
@@ -37,10 +37,6 @@ class Admin::UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.find(params[:id])
-    @user.tasks.destroy_all
-    @user.destroy
-    redirect_to admin_users_path
   end
 
   private
@@ -48,8 +44,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
-
-  # def admin_user
-  #   redirect_to root_path unless current_user.admin?
-  # end
 end

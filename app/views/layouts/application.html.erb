@@ -13,7 +13,7 @@
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "#{key}") %>
   <% end %>
-    <% if logged_in? %>
+    <% if logged_in? && user_admin? %>
       <ul>
         <li id="users-index">
         <%= link_to "ユーザ一覧", admin_users_path %>
@@ -21,6 +21,19 @@
         <li id="add-user">
         <%= link_to "ユーザを登録する", new_admin_user_path %>
         </li>
+        <li id="tasks-index">
+        <%= link_to t('helpers.links.tasks_index'), tasks_path %>
+        </li>
+        <li id="new-task">
+        <%= link_to t('helpers.links.new_task'), new_task_path %>
+        </li>
+        <li id="account-setting">
+        <%= link_to t('helpers.links.account-setting'), user_path(current_user.id) %>
+        </li>
+        <li id="sign-out">
+        <%= link_to t('helpers.links.sign-out'), session_path(current_user.id), method: :delete %>
+        </li>
+      <% elsif logged_in? %>
         <li id="tasks-index">
         <%= link_to t('helpers.links.tasks_index'), tasks_path %>
         </li>

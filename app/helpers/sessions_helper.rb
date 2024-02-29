@@ -15,4 +15,12 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  # def current_user.admin
+  #   @current_user ||= User.find_by(id: session[:user_id], admin: true) if session[:user_id]
+  # end
+
+  # def current_user.admin?(user)
+  #   user == current_user.admin
+  # end
 end

@@ -1,16 +1,16 @@
-<h1><%= t(".title") %></h1>
+<h1>ユーザ登録ページ</h1>
+
 <% if @user.errors.any? %>
-    <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+  <div id="error_explanation">
     <ul>
     <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <li><%= message %></li>
     <% end %>
     </ul>
-    </div>
+  </div>
 <% end %>
 
-<%= form_with(model: @user, local: true) do |f| %>
+<%= form_with(model: [:admin, @user], local: true) do |f| %>
   <div>
   <%= f.label :name %><br>
   <%= f.text_field :name %>
@@ -32,9 +32,11 @@
   </div>
 
   <div>
-  <%= f.submit "更新する", id: "update-user" %>
+  <%= f.label :admin %><br>
+  <%= f.check_box :admin, {}, "true", "false" %>
+  </div>
+
+  <div>
+  <%= f.submit "登録する", id: "create-user" %>
   </div>
 <% end %>
-<div>
-<%= link_to t("helpers.links.back"), user_path, id: "back" %>
-</div>

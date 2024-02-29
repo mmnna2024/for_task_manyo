@@ -15,6 +15,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
+        admin: 管理者権限
   sessions:
     new:
       email: メールアドレス
@@ -58,6 +59,10 @@ ja:
       back: 戻る
       tasks_index: タスク一覧
       new_task: タスクを登録する
+      account-setting: アカウント設定
+      sign-out: ログアウト
+      sign-up: アカウント登録
+      sign-in: ログイン
     messages:
       destroy_confirm: 本当に削除してもよろしいですか？
   time:

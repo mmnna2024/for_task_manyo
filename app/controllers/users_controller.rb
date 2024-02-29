@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     else
         render :edit
     end
-end
+  end
+  
   def destroy
     @user = User.find(params[:id])
     @user.tasks.destroy_all

@@ -15,6 +15,12 @@
   <% end %>
     <% if logged_in? %>
       <ul>
+        <li id="users-index">
+        <%= link_to "ユーザ一覧", admin_users_path %>
+        </li>
+        <li id="add-user">
+        <%= link_to "ユーザを登録する", new_admin_user_path %>
+        </li>
         <li id="tasks-index">
         <%= link_to t('helpers.links.tasks_index'), tasks_path %>
         </li>
@@ -22,17 +28,17 @@
         <%= link_to t('helpers.links.new_task'), new_task_path %>
         </li>
         <li id="account-setting">
-        <%= link_to "アカウント設定", user_path(current_user.id) %>
+        <%= link_to t('helpers.links.account-setting'), user_path(current_user.id) %>
         </li>
         <li id="sign-out">
-        <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+        <%= link_to t('helpers.links.sign-out'), session_path(current_user.id), method: :delete %>
         </li>
       <% else %>
         <li id="sign-up">
-        <%= link_to "アカウント登録", new_user_path %>
+        <%= link_to t('helpers.links.sign-up'), new_user_path %>
         </li>
         <li id="sign-in">
-        <%= link_to "ログイン", new_session_path %>
+        <%= link_to t('helpers.links.sign-in'), new_session_path %>
         </li>
       </ul>
     <% end %>

@@ -1,19 +1,8 @@
-<h1><%= t('.title') %></h1>
+<h1>ユーザ詳細ページ</h1>
 
-<%= form_with(scope: :search, local: true, method: :get) do |form| %>
-
-<div class="field">
-<%= form.label :status, t('activerecord.attributes.task.status')  %>
-<%= form.select :status, options_for_select(Task.statuses.keys), include_blank: true %> <br>
-<%= form.label :title, t('activerecord.attributes.task.title')  %>
-<%= form.text_field :title %>
-</div>
-
-<div class="actions">
-<%= form.submit "検索", id: 'search_task' %>
-</div>
-
-<% end %>
+<p>名前: <%= @user.name %></p>
+<p>メールアドレス: <%= @user.email %></p>
+<p>管理者権限: <%= @user.admin ? "あり" : "なし" %></p>
 
 <table>
   <thead>
@@ -30,7 +19,6 @@
 
   <tbody>
     <% @tasks.each do |task| %>
-      <% if task.user_id == current_user.id %>
       <tr class="task_list">
         <td><%= task.title %></td>
         <td><%= task.content %></td>
@@ -42,10 +30,7 @@
         <td><%= link_to t('helpers.links.edit'), edit_task_path(task), class: "edit-task" %></td>
         <td><%= link_to t('helpers.links.destroy'), task, method: :delete, data: { confirm: t('helpers.messages.destroy_confirm') }, class: "destroy-task" %></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
-<%= paginate @tasks %>
-<br>
-
+<%= link_to t('helpers.links.back'), admin_users_path, id: "back" %>

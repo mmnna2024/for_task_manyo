@@ -1,16 +1,27 @@
-[
-  ['first_task', 'content1', '2022-02-18', '中', '未着手'],
-  ['second_task', 'content2', '2022-02-17', '高', '着手中'],
-  ['third_task', 'content3', '2022-02-16', '低', '完了'],
-  ['4th_task', 'content4', '2022-02-15', '中', '着手中'],
-  ['5th_task', 'content5', '2022-02-14', '高', '完了'],
-  ['6th_task', 'content6', '2022-02-13', '低', '未着手'],
-  ['7th_task', 'content7', '2022-02-12', '中', '完了'],
-  ['8th_task', 'content8', '2022-02-11', '高', '未着手'],
-  ['9th_task', 'content9', '2022-02-10', '低', '着手中'],
-  ['10th_task', 'content10', '2022-02-09', '中', '未着手']
-].each do |title, content, deadline, priority, status|
+User.create!(id: 1, name: "Admin", email: "admin@gmail.com", password: "aaaaaa", admin: true)
+User.create!(id: 2, name: "User1", email: "user1@gmail.com", password: "bbbbbb", admin: false)
+
+start_deadline_on = Date.new(2024, 3, 1)
+end_deadline_on = Date.new(2024, 4, 1)
+
+50.times do |i|
   Task.create!(
-    { title: title, content: content, deadline_on: deadline, priority: priority, status: status}
-  )
+    title: "Task#{i+1}",
+    content: "Content#{i+1}",
+    deadline_on: start_deadline_on + rand(end_deadline_on - start_deadline_on + 1),
+    priority: ["高", "中", "低"].sample,
+    status: ["未着手", "着手中", "完了"].sample,
+    user_id: 1
+    )
+end
+
+50.times do |i|
+  Task.create!(
+    title: "タスク#{i+1}",
+    content: "内容#{i+1}",
+    deadline_on: start_deadline_on + rand(end_deadline_on - start_deadline_on + 1),
+    priority: ["高", "中", "低"].sample,
+    status: ["未着手", "着手中", "完了"].sample,
+    user_id: 2
+    )
 end

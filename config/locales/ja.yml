@@ -10,10 +10,24 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        admin: 管理者
+        task_amount: タスク数
+  sessions:
+    new:
+      email: メールアドレス
+      password: パスワード
   errors:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
+      taken: はすでに使用されています
+      admin_cannot_destroy: が0人になるため削除できません
+      admin_cannot_uncheck: が0人になるため権限を変更できません
   tasks:
     index:
       title: タスク一覧ページ
@@ -29,6 +43,17 @@ ja:
       updated: タスクを更新しました
     destroy:
       destroyed: タスクを削除しました
+  users:
+    new: 
+      title: アカウント登録ページ
+    edit: 
+      title: アカウント編集ページ
+    show: 
+      title: アカウント詳細ページ
+    create:
+      created: アカウントを登録しました
+    update:
+      updated: アカウントを更新しました
   helpers:
     links:
       show: 詳細
@@ -37,8 +62,17 @@ ja:
       back: 戻る
       tasks_index: タスク一覧
       new_task: タスクを登録する
+      account-setting: アカウント設定
+      sign-out: ログアウト
+      sign-up: アカウント登録
+      sign-in: ログイン
     messages:
       destroy_confirm: 本当に削除してもよろしいですか？
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
+  views:
+    pagination:
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."

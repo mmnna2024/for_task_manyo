@@ -6,9 +6,14 @@ RSpec.describe "タスク管理機能", type: :system do
   end
 
   describe "登録機能" do
-    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18") }
+    let!(:user) { FactoryBot.create(:user, id: 1) }
+    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18", user_id: 1) }
 
     before do
+      visit new_session_path
+      fill_in "メールアドレス", with: user.email
+      fill_in "パスワード", with: user.password
+      click_button "ログイン"
       visit tasks_path
     end
 
@@ -21,11 +26,16 @@ RSpec.describe "タスク管理機能", type: :system do
 
   #step2
   describe "一覧表示機能" do
-    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18") }
-    let!(:task2) { FactoryBot.create(:task, id: 2, title: "second_task", created_at: "2022-02-17") }
-    let!(:task3) { FactoryBot.create(:task, id: 3, title: "third_task", created_at: "2022-02-16") }
+    let!(:user) { FactoryBot.create(:user, id: 1) }
+    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18", user_id: 1) }
+    let!(:task2) { FactoryBot.create(:task, id: 2, title: "second_task", created_at: "2022-02-17", user_id: 1) }
+    let!(:task3) { FactoryBot.create(:task, id: 3, title: "third_task", created_at: "2022-02-16", user_id: 1) }
 
     before do
+      visit new_session_path
+      fill_in "メールアドレス", with: user.email
+      fill_in "パスワード", with: user.password
+      click_button "ログイン"
       visit tasks_path
     end
 
@@ -51,9 +61,17 @@ RSpec.describe "タスク管理機能", type: :system do
   end
 
   describe "ソート機能" do
-    let!(:first_task) { FactoryBot.create(:task, title: "first_task_title", deadline_on: "2024-02-18", priority: "高")}
-    let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title", deadline_on: "2024-02-17", priority: "中") }
-    let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title", deadline_on: "2024-02-16", priority: "低") }
+    let!(:user) { FactoryBot.create(:user, id: 1) }
+    let!(:first_task) { FactoryBot.create(:task, title: "first_task_title", deadline_on: "2024-02-18", priority: "高", user_id: 1)}
+    let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title", deadline_on: "2024-02-17", priority: "中", user_id: 1) }
+    let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title", deadline_on: "2024-02-16", priority: "低", user_id: 1) }
+
+    before do
+      visit new_session_path
+      fill_in "メールアドレス", with: user.email
+      fill_in "パスワード", with: user.password
+      click_button "ログイン"
+    end
 
     context "「終了期限」というリンクをクリックした場合" do
       it "終了期限昇順に並び替えられたタスク一覧が表示される" do
@@ -72,9 +90,17 @@ RSpec.describe "タスク管理機能", type: :system do
   end
 
   describe "検索機能" do
-    let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title', status: '着手中') }
-    let!(:second_task) { FactoryBot.create(:second_task, title: 'second_task_title', status: '未着手') }
-    let!(:third_task) { FactoryBot.create(:third_task, title: 'third_task_title', status: '完了') }
+    let!(:user) { FactoryBot.create(:user, id: 1) }
+    let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title', status: '着手中', user_id: 1) }
+    let!(:second_task) { FactoryBot.create(:second_task, title: 'second_task_title', status: '未着手', user_id: 1) }
+    let!(:third_task) { FactoryBot.create(:third_task, title: 'third_task_title', status: '完了', user_id: 1) }
+
+    before do
+      visit new_session_path
+      fill_in "メールアドレス", with: user.email
+      fill_in "パスワード", with: user.password
+      click_button "ログイン"
+    end
 
     context "タイトルであいまい検索をした場合" do
       it "検索ワードを含むタスクのみ表示される" do
@@ -106,9 +132,14 @@ RSpec.describe "タスク管理機能", type: :system do
   end
 
   describe "詳細表示機能" do
-    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18") }
+    let!(:user) { FactoryBot.create(:user, id: 1) }
+    let!(:task1) { FactoryBot.create(:task, id: 1, title: "first_task", created_at: "2022-02-18", user_id: 1) }
 
     before do
+      visit new_session_path
+      fill_in "メールアドレス", with: user.email
+      fill_in "パスワード", with: user.password
+      click_button "ログイン"
       visit tasks_path(1)
     end
 

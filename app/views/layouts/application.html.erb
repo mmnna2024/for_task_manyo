@@ -10,14 +10,51 @@
   </head>
 
   <body>
-    <ul>
-      <li>
-      <%= link_to t('helpers.links.tasks_index'), tasks_path, id: "tasks-index" %>
-      </li>
-      <li>
-      <%= link_to t('helpers.links.new_task'), new_task_path, id: "new-task" %>
-      </li>
-    </ul>
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+  <% end %>
+    <% if logged_in? && user_admin? %>
+      <ul>
+        <li>
+        <%= link_to "ユーザ一覧", admin_users_path,  id: "users-index" %>
+        </li>
+        <li>
+        <%= link_to "ユーザを登録する", new_admin_user_path, id: "add-user" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.tasks_index'), tasks_path, id: "tasks-index" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.new_task'), new_task_path, id: "new-task" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.account-setting'), user_path(current_user.id),  id: "account-setting" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.sign-out'), session_path(current_user.id), method: :delete,  id: "sign-out" %>
+        </li>
+      <% elsif logged_in? %>
+        <li>
+        <%= link_to t('helpers.links.tasks_index'), tasks_path, id: "tasks-index" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.new_task'), new_task_path,  id: "new-task" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.account-setting'), user_path(current_user.id),  id: "account-setting" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.sign-out'), session_path(current_user.id), method: :delete,  id: "sign-out" %>
+        </li>
+      <% else %>
+        <li>
+        <%= link_to t('helpers.links.sign-up'), new_user_path,  id: "sign-up" %>
+        </li>
+        <li>
+        <%= link_to t('helpers.links.sign-in'), new_session_path, id: "sign-in" %>
+        </li>
+      </ul>
+    <% end %>
     <%= yield %>
   </body>
 </html>

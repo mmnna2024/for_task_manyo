@@ -36,7 +36,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      @user.tasks.destroy_all
       redirect_to admin_users_path, flash: { notice: "ユーザを削除しました" }
     else
       redirect_to admin_users_path, flash: { error: "管理者が0人になるため削除できません" }

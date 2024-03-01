@@ -47,11 +47,11 @@
         <%= link_to t('helpers.links.sign-out'), session_path(current_user.id), method: :delete %>
         </li>
       <% else %>
-        <li id="sign-up">
-        <%= link_to t('helpers.links.sign-up'), new_user_path %>
+        <li>
+        <%= link_to t('helpers.links.sign-up'), new_user_path,  id: "sign-up" %>
         </li>
-        <li id="sign-in">
-        <%= link_to t('helpers.links.sign-in'), new_session_path %>
+        <li>
+        <%= link_to t('helpers.links.sign-in'), new_session_path, id: "sign-in" %>
         </li>
       </ul>
     <% end %>

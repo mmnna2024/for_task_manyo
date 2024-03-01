@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tasks do
     get '/search', to: 'tasks#index'
   end
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :users, only: [:new, :create, :show, :edit, :update]
   resources :sessions, only: [:new, :create, :destroy]
   namespace :admin do
     resources :users

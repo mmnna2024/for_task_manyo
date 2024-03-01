@@ -145,5 +145,17 @@ RSpec.describe "ユーザ管理機能", type: :system do
         expect(page).to have_selector("div.notice", text: "管理者以外アクセスできません")
       end
     end
+
+    context "管理者が一人しかいない状態でそのユーザを削除しようとした場合" do
+      it "削除は実行されず「管理者が0人になるため削除できません」というエラーメッセージが表示される" do
+
+      end
+    end
+
+    context "管理者が一人しかいない状態でそのユーザから管理者権限を外す更新をしようとした場合" do
+      it "更新は実行されず「管理者が0人になるため権限を変更できません」というエラーメッセージが表示させる" do
+
+      end
+    end
   end
 end

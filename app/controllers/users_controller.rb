@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in(@user)
-      redirect_to tasks_path, flash: { notice: t('.created') }
+      redirect_to tasks_path, flash: { notice: t(".created") }
     else
       render :new
     end
@@ -27,19 +27,22 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-        redirect_to user_path, flash: { notice: t('.updated') }
+      redirect_to user_path, flash: { notice: t(".updated") }
     else
-        render :edit
+      render :edit
     end
   end
-  
+
   def destroy
     @user = User.find(params[:id])
-    @user.tasks.destroy_all
-    @user.destroy
-    redirect_to admin_users_path, flash: { notice: "ユーザを削除しました" }
+    if @user.destroy
+      @user.tasks.destroy_all
+      redirect_to admin_users_path, flash: { notice: "ユーザを削除しました" }
+    else
+      redirect_to admin_users_path, flash: { error: "管理者が0人になるため削除できません" }
+    end
   end
-  
+
   private
 
   def user_params

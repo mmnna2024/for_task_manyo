@@ -12,7 +12,6 @@ class User < ApplicationRecord
   private
   def cannot_destroy_last_one_admin
     if User.where(admin: true).count == 1 && self.admin?
-      errors.add(:admin, :admin_cannot_destroy)
       throw :abort
     end
   end

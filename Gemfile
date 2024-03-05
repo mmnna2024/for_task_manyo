@@ -26,6 +26,7 @@ gem 'bcrypt', '~> 3.1.20'
 # gem 'image_processing', '~> 1.2'
 gem 'rails-i18n', '~> 6.0.0' 
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

@@ -45,11 +45,6 @@
           data: { confirm: t('helpers.messages.destroy_confirm') },
           class: "destroy-task" %>
         </td>
-        <td>
-          <% task.labels.each do |label| %>
-          <%= label.name %>
-          <% end %>
-        </td>
       </tr>
       <% end %>
     <% end %>

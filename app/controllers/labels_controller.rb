@@ -23,6 +23,7 @@ class LabelsController < ApplicationController
   # POST /labels or /labels.json
   def create
     @label = Label.new(label_params)
+    @label.user_id = current_user.id
     if @label.save
       redirect_to labels_path, flash: { notice: t(".created") }
     else

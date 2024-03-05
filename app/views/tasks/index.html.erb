@@ -3,10 +3,16 @@
 <%= form_with(scope: :search, local: true, method: :get) do |form| %>
 
 <div class="field">
-<%= form.label :status, t('activerecord.attributes.task.status')  %>
-<%= form.select :status, options_for_select(Task.statuses.keys), include_blank: true %> <br>
-<%= form.label :title, t('activerecord.attributes.task.title')  %>
+<%= form.label :status, t('activerecord.attributes.task.status')  %><br>
+<%= form.select :status, options_for_select(Task.statuses.keys), include_blank: true %>
+</div>
+<div class="field">
+<%= form.label :title, t('activerecord.attributes.task.title')  %><br>
 <%= form.text_field :title %>
+</div>
+<div class="field">
+<%= form.label :title, 'ラベル'  %><br>
+<%= form.select :label_id, options_from_collection_for_select(Label.where(user_id: current_user.id), :id, :name, params[:label_id]), include_blank: true %>
 </div>
 
 <div class="actions">

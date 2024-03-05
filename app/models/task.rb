@@ -8,19 +8,23 @@ class Task < ApplicationRecord
 
   scope :title_search, ->(part) {where("title like ?", "%#{part}%")}
   scope :status_search, ->(status) {where(status: status)}
-  #scope :status_search_v2, ->(status) {status ? where(status: status) : nil}
+  scope :label_search, ->(label_id) { joins(:labels).where(labels: {id: label_id}) }
 
   def self.sort_by_created_at
     Task.all.order(created_at: :desc)
   end
 
   def self.seach_by_params(params)
-    if has_status_title?(params)#パラメータにタイトルとステータスの両方があった場合
+    if has_status_title_label?(params)#パラメータにタイトルとステータスの両方があった場合
+      Task.label_search(params[:search][:label_id]).title_search(params[:search][:title]).status_search(params[:search][:status])
+    elsif has_only_status_title?(params)
       Task.title_search(params[:search][:title]).status_search(params[:search][:status])
     elsif has_only_title?(params)#パラメータにタイトルのみがあった場合
       Task.title_search(params[:search][:title])
     elsif has_only_status?(params)#パラメータにステータスのみがあった場合
       Task.status_search(params[:search][:status])
+    elsif self.has_label?(params)#もし渡されたパラメータがラベルだった場合
+      Task.label_search(params[:search][:label_id])
     else
       Task.all.sort_by_created_at
     end
@@ -39,15 +43,23 @@ class Task < ApplicationRecord
 
   private
 
-  def self.has_status_title?(params)
-    params[:search][:status].present? && params[:search][:title].present?
+  def self.has_status_title_label?(params)
+    params[:search][:status].present? && params[:search][:title].present? && params[:search][:label_id].present?
+  end
+
+  def self.has_only_status_title?(params)
+    params[:search][:status].present? && params[:search][:title].present? && params[:search][:label_id].blank?
   end
 
   def self.has_only_title?(params)
-    params[:search][:title].present? && params[:search][:status].blank?
+    params[:search][:title].present? && params[:search][:status].blank? && params[:search][:label_id].blank?
   end
 
   def self.has_only_status?(params)
-    params[:search][:status].present? && params[:search][:title].blank?
+    params[:search][:status].present? && params[:search][:title].blank? && params[:search][:label_id].blank?
+  end
+
+  def self.has_label?(params)
+    params[:search][:label_id].present?
   end
 end

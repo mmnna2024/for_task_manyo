@@ -35,6 +35,14 @@
     <%= form.select :status, Task.statuses.keys, include_blank: true %>
   </div>
 
+  <div class="field">
+    <%= form.label :label %><br>
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id] %>
+      <%= label.name %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit id: button_id %>
   </div>

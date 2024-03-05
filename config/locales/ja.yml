@@ -17,6 +17,8 @@ ja:
         password_confirmation: パスワード（確認）
         admin: 管理者
         task_amount: タスク数
+      label:
+        name: 名前
   sessions:
     new:
       email: メールアドレス
@@ -54,6 +56,13 @@ ja:
       created: アカウントを登録しました
     update:
       updated: アカウントを更新しました
+  labels:
+    create:
+      created: ラベルを登録しました
+    update:
+      updated: ラベルを更新しました
+    destroy:
+      destroyed: ラベルを削除しました
   helpers:
     links:
       show: 詳細
@@ -66,6 +75,8 @@ ja:
       sign-out: ログアウト
       sign-up: アカウント登録
       sign-in: ログイン
+      labels_index: ラベル一覧
+      new_label: ラベルを登録する
     messages:
       destroy_confirm: 本当に削除してもよろしいですか？
   time:

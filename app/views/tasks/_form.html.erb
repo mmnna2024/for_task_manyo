@@ -49,7 +49,7 @@
     <%= form.label :label, class: "form-label" %><br>
     <% Label.all.each do |label| %>
       <% if label.user_id == current_user.id %>
-      <%= form.check_box :label_ids, { class: "form-check-input" }, { multiple: true, include_hidden: false }, label[:id] %>
+      <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], { class: "form-check-input" } %>
       <%= label.name %>
       <% end %>
     <% end %>

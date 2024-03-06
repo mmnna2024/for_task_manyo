@@ -47,6 +47,7 @@
 
   <div class="mb-3">
     <%= form.label :label, class: "form-label" %><br>
+    <%= hidden_field_tag "task[label_ids][]", "" %>
     <% Label.all.each do |label| %>
       <% if label.user_id == current_user.id %>
       <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], { class: "form-check-input" } %>

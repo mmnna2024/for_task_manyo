@@ -1,38 +1,5 @@
-<h1><%= t(".title") %></h1>
-<% if @user.errors.any? %>
-    <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
-    </ul>
-    </div>
-<% end %>
+<h2 class="my-3"><%= t(".title") %></h2>
 
-<%= form_with(model: @user, local: true) do |f| %>
-  <div>
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
-  </div>
+<%= render  partial: 'form', locals: { button_id: 'update-user', user: @user } %>
 
-  <div>
-  <%= f.label :email %><br>
-  <%= f.email_field :email %>
-  </div>
-
-  <div>
-  <%= f.label :password %><br>
-  <%= f.password_field :password %>
-  </div>
-
-  <div>
-  <%= f.label :password_confirmation %><br>
-  <%= f.password_field :password_confirmation %>
-  </div>
-
-  <%= f.submit "更新する", id: "update-user" %>
-<% end %>
-<div>
-<%= link_to t("helpers.links.back"), user_path, id: "back" %>
-</div>
+<%= link_to t("helpers.links.back"), user_path, id: "back", class: "text-decoration-none" %>

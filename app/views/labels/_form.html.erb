@@ -10,12 +10,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <div class="col-5">
+    <%= form.label :name, class: "form-label" %><br>
+    <%= form.text_field :name, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit class: "btn btn-primary col-1" %>
   </div>
 <% end %>

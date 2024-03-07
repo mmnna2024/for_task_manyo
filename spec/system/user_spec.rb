@@ -1,13 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "ユーザ管理機能", type: :system do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:task) { FactoryBot.create(:task, user: user) }
+  let!(:user2) { FactoryBot.create(:user2) }
+  let!(:task2) { FactoryBot.create(:second_task, user: user2) }
+
   before do
     driven_by(:selenium_chrome_headless)
   end
 
   describe "登録機能" do
-    let!(:user) { FactoryBot.create(:user) }
-
     before do
       visit new_session_path
     end
@@ -31,11 +34,7 @@ RSpec.describe "ユーザ管理機能", type: :system do
   end
 
   describe "ログイン機能" do
-    let!(:user) { FactoryBot.create(:user, id: 1) }
-    let!(:task) { FactoryBot.create(:task, id: 1, user_id: 1) }
-    let!(:user2) { FactoryBot.create(:user2, id: 2) }
-    let!(:task2) { FactoryBot.create(:second_task, id: 2, user_id: 2) }
-
+    
     before do
       visit new_session_path
       fill_in "メールアドレス", with: user.email
@@ -55,7 +54,7 @@ RSpec.describe "ユーザ管理機能", type: :system do
       end
 
       it "他人の詳細画面にアクセスすると、タスク一覧画面に遷移する" do
-        visit task_path(2)
+        visit task_path(task2.id)
         expect(page).to have_content("タスク一覧ページ")
         expect(page).to have_selector("div.notice", text: "アクセス権限がありません")
       end
@@ -69,10 +68,6 @@ RSpec.describe "ユーザ管理機能", type: :system do
   end
 
   describe "管理者機能" do
-    let!(:user) { FactoryBot.create(:user, id: 1) }
-    let!(:user2) { FactoryBot.create(:user2, id: 2, admin: true) }
-    let!(:task) { FactoryBot.create(:task, id: 1, user_id: 1) }
-    let!(:task2) { FactoryBot.create(:second_task, id: 2, user_id: 2) }
 
     def login_as_admin
       visit new_session_path
@@ -81,7 +76,7 @@ RSpec.describe "ユーザ管理機能", type: :system do
       click_button "ログイン"
     end
 
-    def login_as_notadmin
+    def login_as_user
       visit new_session_path
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: user.password
@@ -102,7 +97,7 @@ RSpec.describe "ユーザ管理機能", type: :system do
         fill_in "メールアドレス", with: "user3@gmail.com"
         fill_in "パスワード", with: "user3desu"
         fill_in "パスワード（確認）", with: "user3desu"
-        find(".check_admin").click
+        find("#user_admin").click
         click_button "登録する"
         expect(page).to have_content("ユーザ一覧ページ")
         expect(page).to have_selector("div.notice", text: "ユーザを登録しました")
@@ -110,13 +105,13 @@ RSpec.describe "ユーザ管理機能", type: :system do
 
       it "ユーザ詳細画面にアクセスできる" do
         login_as_admin
-        visit admin_user_path(2)
+        visit admin_user_path(user.id)
         expect(page).to have_content("ユーザ詳細ページ")
       end
 
       it "ユーザ編集画面から、自分以外のユーザを編集できる" do
         login_as_admin
-        visit edit_admin_user_path(1)
+        visit edit_admin_user_path(user.id)
         fill_in "名前", with: user.name
         fill_in "メールアドレス", with: user.email
         fill_in "パスワード", with: user.password
@@ -139,7 +134,7 @@ RSpec.describe "ユーザ管理機能", type: :system do
 
     context "一般ユーザがユーザ一覧画面にアクセスした場合" do
       it "タスク一覧画面に遷移し、「管理者以外アクセスできません」というエラーメッセージが表示される" do
-        login_as_notadmin
+        login_as_user
         visit admin_users_path
         expect(page).to have_content("タスク一覧ページ")
         expect(page).to have_selector("div.notice", text: "管理者以外アクセスできません")

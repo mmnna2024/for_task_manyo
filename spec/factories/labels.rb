@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :label do
-    name { "Label1" }
+    name { 'label-1' }
+    user
   end
 end
+

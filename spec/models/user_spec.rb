@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ユーザモデル機能', type: :model do
   describe 'バリデーションのテスト' do
-    let!(:user1) { FactoryBot.create(:user) }
+    let!(:user1) { FactoryBot.create(:user, email: "user1@gmail.com") }
 
     context 'ユーザーの名前が空文字の場合' do
       it 'バリデーションに失敗する' do

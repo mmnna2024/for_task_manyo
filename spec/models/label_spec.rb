@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'ラベルモデル機能', type: :model do
   describe 'バリデーションのテスト' do
-    let!(:user) { FactoryBot.create(:user, id: 1) }
-    let!(:label) { FactoryBot.create(:label, user_id: 1) }
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:label) { FactoryBot.create(:label, user: user) }
 
     context 'ラベルの名前が空文字の場合' do
       it 'バリデーションに失敗する' do

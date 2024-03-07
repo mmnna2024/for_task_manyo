@@ -1,7 +1,6 @@
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
-    <div id="error_explanation">
-
+    <div id="error_explanation" class="alert alert-danger">
       <ul>
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,41 +11,41 @@
 
   <div class="mb-3">
     <div class="col-5">
-    <%= form.label :title, class: "form-label" %><br>
+    <%= form.label :title, class: "form-label" %>
     <%= form.text_field :title, class: "form-control" %>
     </div>
   </div>
 
   <div class="mb-3">
     <div class="col-5">
-    <%= form.label :content, class: "form-label" %><br>
+    <%= form.label :content, class: "form-label" %>
     <%= form.text_area :content, class: "form-control" %>
     </div>
   </div>
 
   <div class="mb-3">
     <div class="col-2">
-    <%= form.label :deadline_on, class: "form-label" %><br>
+    <%= form.label :deadline_on, class: "form-label" %>
     <%= form.date_field :deadline_on, class: "form-control" %>
     </div>
   </div>
 
   <div class="mb-3">
     <div class="col-2">
-    <%= form.label :priority, class: "form-label" %><br>
+    <%= form.label :priority, class: "form-label" %>
     <%= form.select :priority, Task.priorities.keys, { include_blank: true }, { class: "form-select" } %>
     </div>
   </div>
 
   <div class="mb-3">
     <div class="col-2">
-    <%= form.label :status, class: "form-label" %><br>
+    <%= form.label :status, class: "form-label" %>
     <%= form.select :status, Task.statuses.keys, { include_blank: true }, { class: "form-select" } %>
     </div>
   </div>
 
   <div class="mb-3">
-    <%= form.label :label, class: "form-label" %><br>
+    <%= form.label :label, class: "form-label" %>
     <%= hidden_field_tag "task[label_ids][]", "" %>
     <% Label.all.each do |label| %>
       <% if label.user_id == current_user.id %>

@@ -1,7 +1,6 @@
 <%= form_with(model: label, local:true) do |form| %>
   <% if label.errors.any? %>
-    <div id="error_explanation">
-
+    <div id="error_explanation" class="alert alert-danger">
       <ul>
         <% label.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,7 +11,7 @@
 
   <div class="mb-3">
     <div class="col-5">
-    <%= form.label :name, class: "form-label" %><br>
+    <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
     </div>
   </div>

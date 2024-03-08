@@ -17,11 +17,12 @@ RSpec.describe "ラベル管理機能", type: :system do
 
   describe "登録機能" do
     context "ラベルを登録した場合" do
-      it "登録したラベルが表示される" do
+      it "登録したラベルが表示され、「ラベルを登録しました」とメッセージが表示される" do
         visit new_label_path
         fill_in "名前", with: label.name
         click_button "登録する"
         expect(page).to have_content "label-1"
+        expect(page).to have_selector("div.alert", text: "ラベルを登録しました")
       end
     end
   end

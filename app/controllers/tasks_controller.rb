@@ -34,23 +34,19 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
-      if @task.save
-        redirect_to tasks_path, flash: { notice: t('.created') }
-      else
-        render :new
-      end
+    if @task.save
+      redirect_to tasks_path, flash: { notice: t(".created") }
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, flash: { notice: t('.updated') } }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.update(task_params)
+      redirect_to @task, flash: { notice: t(".updated") } 
+    else
+      render :edit
     end
   end
 
@@ -58,27 +54,27 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, flash: { notice: t('.destroyed') } }
+      format.html { redirect_to tasks_url, flash: { notice: t(".destroyed") } }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    def correct_user
-      @task = current_user.tasks.find_by(id: params[:id])
-      unless @task
-        redirect_to tasks_path, flash: { notice: "アクセス権限がありません" }
-      end
-    end
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, { label_ids: [] })
+  end
 
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to tasks_path, flash: { notice: "アクセス権限がありません" }
+    end
+  end
 end

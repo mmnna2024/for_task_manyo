@@ -1,5 +1,8 @@
-<h1><%= t('.title') %></h1>
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
-
-<%= link_to t('helpers.links.edit'), edit_user_path,  id: "edit-user" %>
+<h2 class="my-5 text-center"><%= t('.title') %></h2>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <p class="fw-bold">名前: <span class="fw-normal"><%= @user.name %></span></p>
+    <p class="fw-bold">メールアドレス: <span class="fw-normal"><%= @user.email %></span></p>
+    <%= link_to t('helpers.links.edit'), edit_user_path,  id: "edit-user", class: "text-decoration-none" %>
+  </div>
+</div>

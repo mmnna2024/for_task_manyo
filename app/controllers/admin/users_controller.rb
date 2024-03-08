@@ -22,7 +22,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @tasks = @user.tasks
+    @tasks = @user.tasks.sort_by_created_at.page(params[:page]).per(10)
   end
 
   def edit

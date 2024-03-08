@@ -1,11 +1,14 @@
-<h1>ユーザ詳細ページ</h1>
+<h2 class="my-5 text-center">ユーザ詳細ページ</h2>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <p class="fw-bold">名前: <span class="fw-normal"><%= @user.name %></span></p>
+    <p class="fw-bold">メールアドレス: <span class="fw-normal"><%= @user.email %></span></p>
+    <p class="fw-bold">管理者権限: <span class="fw-normal"><%= @user.admin ? "あり" : "なし" %></span></p>
+  </div>
+</div>
 
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
-<p>管理者権限: <%= @user.admin ? "あり" : "なし" %></p>
-
-<table>
-  <thead>
+<table class="table">
+  <thead class="table-light">
     <tr>
       <th><%= t('activerecord.attributes.task.title') %></th>
       <th><%= t('activerecord.attributes.task.content') %></th>
@@ -33,4 +36,5 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to t('helpers.links.back'), admin_users_path, id: "back" %>
+<%= paginate @tasks, theme: 'bootstrap-5' %>
+<%= link_to t('helpers.links.back'), admin_users_path, id: "back", class: "text-decoration-none" %>

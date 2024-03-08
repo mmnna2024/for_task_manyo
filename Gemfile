@@ -26,6 +26,7 @@ gem 'bcrypt', '~> 3.1.20'
 # gem 'image_processing', '~> 1.2'
 gem 'rails-i18n', '~> 6.0.0' 
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -35,6 +36,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rexml'
   gem 'factory_bot_rails'
+  gem 'pry-rails', :group => :development
+  gem 'pry-byebug', :group => :development
 end
 
 group :development do
@@ -44,9 +47,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
-  gem 'pry-rails', :group => :development
-  gem 'pry-byebug', :group => :development
 end
 
 group :test do

@@ -1,7 +1,6 @@
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
-    <div id="error_explanation">
-
+    <div id="error_explanation" class="alert alert-danger">
       <ul>
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,32 +9,53 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <div class="col-5">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :content %><br>
-    <%= form.text_area :content %>
+  <div class="mb-3">
+    <div class="col-5">
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :deadline_on %><br>
-    <%= form.date_field :deadline_on %>
+  <div class="mb-3">
+    <div class="col-2">
+    <%= form.label :deadline_on, class: "form-label" %>
+    <%= form.date_field :deadline_on, class: "form-control" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :priority %><br>
-    <%= form.select :priority, Task.priorities.keys, include_blank: true %>
+  <div class="mb-3">
+    <div class="col-2">
+    <%= form.label :priority, class: "form-label" %>
+    <%= form.select :priority, Task.priorities.keys, { include_blank: true }, { class: "form-select" } %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :status %><br>
-    <%= form.select :status, Task.statuses.keys, include_blank: true %>
+  <div class="mb-3">
+    <div class="col-2">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, Task.statuses.keys, { include_blank: true }, { class: "form-select" } %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit id: button_id %>
+  <div class="mb-3">
+    <%= form.label :label, class: "form-label" %>
+    <%= hidden_field_tag "task[label_ids][]", "" %>
+    <% Label.all.each do |label| %>
+      <% if label.user_id == current_user.id %>
+      <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id], { class: "form-check-input" } %>
+      <%= label.name %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit id: button_id, class: "btn btn-primary col-1" %>
   </div>
 <% end %>
